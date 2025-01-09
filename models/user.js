@@ -39,6 +39,11 @@ const userSchema = new mongoose.Schema({
         required : true,
     },
 
+    whatsApp : {
+        type : String,
+        required : true,
+    },
+
 
 })
 
