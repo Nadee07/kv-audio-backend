@@ -13,7 +13,7 @@ let app = express();
 
 app.use(bodyParser.json());
 app.use((req,res,next)=>{
-   let token = req.header("Authorization")
+   let token = req.header("Authorization");  //crated the auth
 
    if(token!=null){
       token= token.replace("Bearer ","")
