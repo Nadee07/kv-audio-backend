@@ -10,7 +10,7 @@ const inquirySchema = new mongoose.Schema({
     email : {
         type : String,
         required : true,
-        unique : true 
+        
     },
 
     message : {
@@ -24,7 +24,7 @@ const inquirySchema = new mongoose.Schema({
     },
 
     date : {
-        type : date,
+        type : Date,
         required : true,
         default : Date.now() 
     },
@@ -36,12 +36,12 @@ const inquirySchema = new mongoose.Schema({
     },
 
     isResolved : {
-        type : String,
+        type : Boolean,
         required : true,
         default :false 
     },
 })
 
-const Inquiry = mongoose.model("Inquiry", inquirySchema);
+const Inquiry = mongoose.model("Inquiries", inquirySchema);
 
 export default Inquiry;

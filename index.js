@@ -7,10 +7,34 @@ import productRouter from "./routes/productRouter.js";
 import jwt, { decode } from "jsonwebtoken";
 import dotenv from "dotenv";
 import reviewRouter from "./routes/reviewRoute.js";
+import inquiryRouter from "./routes/inquiryRoute.js";
 
 dotenv.config();
 
-let app = express();
+const app = express();
+app.use(express.json());
+
+app.use(bodyParser.json());
+
+app.use((req,res,next)=>{
+
+    let token = req.header
+    ("Authorization")
+
+    if(token != null){
+        token = token.replace("Bearer ", "")
+        jwt.verify(token, process.env.JWT_SECRET,
+            (err,decoded)=>{
+                if(!err){
+                    req.user = decoded;           
+                }
+            }
+        );
+    }
+        next();
+});
+
+/*let app = express();
 
 app.use(bodyParser.json());
 app.use((req,res,next)=>{
@@ -29,7 +53,7 @@ app.use((req,res,next)=>{
    next() 
 }
 
-)
+)*/
 
 
 let mongourl = process.env.MONGO_URL;
@@ -44,6 +68,7 @@ connection.once("open",()=>{
 app.use("/api/users",userRouter);
 app.use("/api/products",productRouter);
 app.use("/api/reviews",reviewRouter);
+app.use("/api/inquiries",inquiryRouter);
 /*app.get("/", (req,res) => {
 
   
