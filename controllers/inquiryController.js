@@ -72,11 +72,11 @@ export async function deleteInquiry(req,res){
         res.json({ message:"Inquiry deleted successfully"})
         return;
 
-      }else if(isItCustomer(req)){
+       }else if(isItCustomer(req)){
         const id = req.params.id;
         const inquiry = await Inquiry.findOne({id:id});
         if(inquiry == null){
-          res.status(403).json({
+          res.status(404).json({
             message:"Inquiry not found"
           })
           return;
